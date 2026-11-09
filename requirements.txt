@@ -1,0 +1,17 @@
+# Supported Python: 3.12. Install a hardware-appropriate torch wheel first.
+# Constraints specify API families; this is not an exact historical lockfile.
+torch>=2.6,<3
+transformers>=4.57,<5
+datasets>=3,<5
+accelerate>=1,<2
+nnsight==0.5.15
+numpy>=2,<3
+pandas>=2,<4
+scipy>=1.13,<2
+scikit-learn>=1.5,<2
+joblib>=1.4,<2
+pyarrow>=18,<26
+psutil>=6,<8
+huggingface-hub>=0.26,<1
+matplotlib>=3.8,<4
+# Optional plotting extension: umap-learn>=0.5,<1

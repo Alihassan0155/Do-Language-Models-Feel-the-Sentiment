@@ -1,0 +1,9 @@
+from release_paths import WORKSPACE, CODE_ROOT, source_path
+'Fixed sentiment prompts for reproducible Qwen evaluation.\n\nChoose a dataset and template ID before an evaluation run. Keep that choice\nconstant for every example and model in the run.\n'
+from types import MappingProxyType
+QWEN3B_SST2_T4_PROMPT = 'Classify the sentiment as exactly one label: positive or negative. Return only positive or negative label. No explanation.\n\nText: {text}'
+PROMPT_TEMPLATES = MappingProxyType({'sst2': MappingProxyType({'template_1': 'Classify the sentiment of this text as positive or negative.\nReply with only one label: positive or negative.\n\nText: {text}', 'template_2': 'Determine whether the following text expresses positive or negative sentiment.\nAnswer only: positive or negative.\n\nText: {text}', 'template_3': 'Read the text and identify its sentiment.\nOutput exactly one word: positive or negative.\n\nText: {text}', 'template_4': 'Is the sentiment in this text positive or negative?\nReturn only the label, with no explanation.\n\nText: {text}'}), 'tweet_eval_sentiment': MappingProxyType({'template_1': 'Classify the sentiment of this text as negative, neutral, or positive.\nReply with only one label: negative, neutral, or positive.\n\nText: {text}', 'template_2': 'Determine whether the following text expresses negative, neutral, or positive sentiment.\nAnswer only: negative, neutral, or positive.\n\nText: {text}', 'template_3': 'Read the text and identify its sentiment.\nOutput exactly one word: negative, neutral, or positive.\n\nText: {text}', 'template_4': 'Is the sentiment in this text negative, neutral, or positive?\nReturn only the label, with no explanation.\n\nText: {text}'})})
+
+def render_prompt(dataset: str, template_id: str, text: str) -> str:
+    """Insert the example text without modifying the selected prompt wording."""
+    return PROMPT_TEMPLATES[dataset][template_id].format(text=text)
